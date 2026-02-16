@@ -1,9 +1,0 @@
-@echo off
-echo Создание виртуального окружения...
-python -m venv venv
-echo Активация окружения...
-call venv\Scripts\activate
-echo Установка зависимостей из requirements.txt...
-pip install -r requirements.txt
-echo Готово!
-pause
