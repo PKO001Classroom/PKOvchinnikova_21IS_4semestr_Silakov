@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.db
+*.sqlite3
+
+# Сгенерированные файлы
+*.docx
+*.xlsx
+*.pdf
+reports/
+exports/
+
+# IDE
+.vscode/
+.idea/
