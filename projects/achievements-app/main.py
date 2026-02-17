@@ -5,7 +5,7 @@
 import sys
 import os
 
-# Добавляем путь к src в системный путь
+# Добавляем путь к проекту в системный путь
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import tkinter as tk
