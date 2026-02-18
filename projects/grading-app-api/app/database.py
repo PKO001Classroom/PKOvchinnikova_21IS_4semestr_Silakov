@@ -1,7 +1,9 @@
 import sqlite3
 from typing import List, Tuple, Optional
 
-def init_db(db_path: str = "grades.db") -> None:
+DB_PATH = "grades.db"
+
+def init_db(db_path: str = DB_PATH) -> None:
     """Создание таблиц students, subjects и grades."""
     try:
         with sqlite3.connect(db_path) as conn:
@@ -31,12 +33,11 @@ def init_db(db_path: str = "grades.db") -> None:
                 )
             ''')
             conn.commit()
-        print("База данных инициализирована")
+        print("✅ База данных инициализирована")
     except Exception as e:
-        print(f"Ошибка инициализации БД: {e}")
+        print(f"❌ Ошибка инициализации БД: {e}")
 
 def add_student(db_path: str, name: str, student_id: str) -> Optional[int]:
-    """Добавление нового студента."""
     try:
         with sqlite3.connect(db_path) as conn:
             cur = conn.cursor()
@@ -44,24 +45,54 @@ def add_student(db_path: str, name: str, student_id: str) -> Optional[int]:
             conn.commit()
             return cur.lastrowid
     except sqlite3.IntegrityError:
-        print(f"Ошибка: студент с номером {student_id} уже существует.")
         return None
     except Exception as e:
-        print(f"Ошибка добавления студента: {e}")
+        print(f"❌ Ошибка добавления студента: {e}")
         return None
 
 def get_all_students(db_path: str) -> List[Tuple]:
-    """Получение всех студентов, отсортированных по имени."""
     try:
         with sqlite3.connect(db_path) as conn:
             cur = conn.cursor()
             cur.execute("SELECT id, name, student_id FROM students ORDER BY name")
             return cur.fetchall()
     except Exception as e:
-        print(f"Ошибка загрузки студентов: {e}")
+        print(f"❌ Ошибка загрузки студентов: {e}")
         return []
 
-# Аналогичные функции для subjects...
+def get_student_by_id(db_path: str, student_id: int) -> Optional[Tuple]:
+    try:
+        with sqlite3.connect(db_path) as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT id, name, student_id FROM students WHERE id = ?", (student_id,))
+            return cur.fetchone()
+    except Exception as e:
+        print(f"❌ Ошибка загрузки студента: {e}")
+        return None
+
+def update_student(db_path: str, student_id: int, name: str, student_id_num: str) -> bool:
+    try:
+        with sqlite3.connect(db_path) as conn:
+            cur = conn.cursor()
+            cur.execute("UPDATE students SET name = ?, student_id = ? WHERE id = ?",
+                       (name, student_id_num, student_id))
+            conn.commit()
+            return cur.rowcount > 0
+    except Exception as e:
+        print(f"❌ Ошибка обновления студента: {e}")
+        return False
+
+def delete_student(db_path: str, student_id: int) -> bool:
+    try:
+        with sqlite3.connect(db_path) as conn:
+            cur = conn.cursor()
+            cur.execute("DELETE FROM students WHERE id = ?", (student_id,))
+            conn.commit()
+            return cur.rowcount > 0
+    except Exception as e:
+        print(f"❌ Ошибка удаления студента: {e}")
+        return False
+
 def add_subject(db_path: str, name: str) -> Optional[int]:
     try:
         with sqlite3.connect(db_path) as conn:
@@ -70,10 +101,9 @@ def add_subject(db_path: str, name: str) -> Optional[int]:
             conn.commit()
             return cur.lastrowid
     except sqlite3.IntegrityError:
-        print(f"Ошибка: предмет '{name}' уже существует.")
         return None
     except Exception as e:
-        print(f"Ошибка добавления предмета: {e}")
+        print(f"❌ Ошибка добавления предмета: {e}")
         return None
 
 def get_all_subjects(db_path: str) -> List[Tuple]:
@@ -83,11 +113,10 @@ def get_all_subjects(db_path: str) -> List[Tuple]:
             cur.execute("SELECT id, name FROM subjects ORDER BY name")
             return cur.fetchall()
     except Exception as e:
-        print(f"Ошибка загрузки предметов: {e}")
+        print(f"❌ Ошибка загрузки предметов: {e}")
         return []
 
 def add_grade(db_path: str, student_id: int, subject_id: int, grade: int, date: str) -> bool:
-    """Добавление оценки."""
     try:
         with sqlite3.connect(db_path) as conn:
             cur = conn.cursor()
@@ -98,11 +127,10 @@ def add_grade(db_path: str, student_id: int, subject_id: int, grade: int, date: 
             conn.commit()
         return True
     except Exception as e:
-        print(f"Ошибка добавления оценки: {e}")
+        print(f"❌ Ошибка добавления оценки: {e}")
         return False
 
 def get_grades_for_student(db_path: str, student_id: int) -> List[Tuple]:
-    """Получение всех оценок студента с названиями предметов."""
     try:
         with sqlite3.connect(db_path) as conn:
             cur = conn.cursor()
@@ -115,11 +143,10 @@ def get_grades_for_student(db_path: str, student_id: int) -> List[Tuple]:
             ''', (student_id,))
             return cur.fetchall()
     except Exception as e:
-        print(f"Ошибка загрузки оценок: {e}")
+        print(f"❌ Ошибка загрузки оценок: {e}")
         return []
 
 def get_student_average(db_path: str, student_id: int) -> float:
-    """Подсчет среднего балла студента по всем предметам."""
     try:
         with sqlite3.connect(db_path) as conn:
             cur = conn.cursor()
@@ -127,5 +154,5 @@ def get_student_average(db_path: str, student_id: int) -> float:
             result = cur.fetchone()[0]
             return round(result, 2) if result else 0.0
     except Exception as e:
-        print(f"Ошибка подсчета среднего: {e}")
+        print(f"❌ Ошибка подсчета среднего: {e}")
         return 0.0
