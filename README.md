@@ -24,7 +24,7 @@
 4.  **[Portfolio App](projects/portfolio-app/)** — Электронное портфолио студента (Python, PostgreSQL, Tkinter).
 5.  **[Research Portfolio](projects/research-portfolio/)** — Улучшенная версия портфолио (Python, PostgreSQL, Tkinter).
 6.  **[Academic Tracker](projects/academic-tracker/)** — Трекер академических достижений "МойТрекер" (Python, SQLite, Tkinter).
-7.  **[Grading App](projects/grading-app/)** — **НОВЫЙ ПРОЕКТ** — Приложение для учёта оценок студентов (Python, SQLite, Tkinter).
+7.  **[Grading App](projects/grading-app/)** —  Приложение для учёта оценок студентов (Python, SQLite, Tkinter).
 
 ## 📄 Общая документация
 
