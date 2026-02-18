@@ -1,0 +1,7 @@
+[
+  "tests/test_iom.py::TestDatabase::test_add_goal",
+  "tests/test_iom.py::TestDatabase::test_add_skill",
+  "tests/test_iom.py::TestDatabase::test_init_database",
+  "tests/test_iom.py::TestDatabase::test_link_goal_skill",
+  "tests/test_iom.py::TestDatabase::test_load_goals"
+]

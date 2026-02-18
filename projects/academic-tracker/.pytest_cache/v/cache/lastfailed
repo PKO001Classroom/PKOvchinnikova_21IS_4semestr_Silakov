@@ -1,0 +1,8 @@
+{
+  "tests/test_academic.py::TestDatabase::test_get_entries": true,
+  "tests/test_academic.py::TestDatabase::test_add_achievement": true,
+  "tests/test_academic.py::TestDatabase::test_update_achievement": true,
+  "tests/test_academic.py::TestAchievementTracker::test_add_achievement": true,
+  "tests/test_academic.py::TestAchievementTracker::test_mark_as_obtained": true,
+  "tests/test_academic.py::TestReportExporter::test_export_to_excel": true
+}

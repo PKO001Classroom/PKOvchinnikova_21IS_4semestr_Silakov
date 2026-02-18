@@ -1,0 +1,6 @@
+{
+  "tests/test_portfolio.py::TestExporter::test_exporter_init": true,
+  "tests/test_portfolio.py::TestExporter::test_generate_excel_report": true,
+  "tests/test_portfolio.py::TestExporter::test_generate_word_report": true,
+  "tests/test_portfolio.py::TestPortfolioApp::test_ensure_folders": true
+}

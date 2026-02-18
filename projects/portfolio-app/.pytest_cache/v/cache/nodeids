@@ -1,0 +1,14 @@
+[
+  "tests/test_portfolio.py::TestDatabase::test_database_init_failure",
+  "tests/test_portfolio.py::TestDatabase::test_database_init_success",
+  "tests/test_portfolio.py::TestExporter::test_exporter_init",
+  "tests/test_portfolio.py::TestExporter::test_generate_excel_report",
+  "tests/test_portfolio.py::TestExporter::test_generate_word_report",
+  "tests/test_portfolio.py::TestPortfolioApp::test_app_initialization",
+  "tests/test_portfolio.py::TestPortfolioApp::test_ensure_folders",
+  "tests/test_portfolio.py::TestPortfolioApp::test_load_projects",
+  "tests/test_portfolio.py::TestReportGenerator::test_ensure_folders",
+  "tests/test_portfolio.py::TestReportGenerator::test_generate_excel_report",
+  "tests/test_portfolio.py::TestReportGenerator::test_generate_word_report",
+  "tests/test_portfolio.py::TestReportGenerator::test_report_generator_init"
+]

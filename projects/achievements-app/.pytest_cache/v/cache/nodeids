@@ -1,0 +1,18 @@
+[
+  "tests/test_achievements.py::TestDatabaseFunctions::test_delete_achievement_success",
+  "tests/test_achievements.py::TestDatabaseFunctions::test_init_db_creates_table",
+  "tests/test_achievements.py::TestDatabaseFunctions::test_load_all_achievements_empty",
+  "tests/test_achievements.py::TestDatabaseFunctions::test_load_all_achievements_success",
+  "tests/test_achievements.py::TestDatabaseFunctions::test_save_achievement_failure",
+  "tests/test_achievements.py::TestDatabaseFunctions::test_save_achievement_success",
+  "tests/test_achievements.py::TestFileFunctions::test_export_to_word_empty",
+  "tests/test_achievements.py::TestFileFunctions::test_export_to_word_success",
+  "tests/test_achievements.py::TestFileFunctions::test_load_types_file_not_exists",
+  "tests/test_achievements.py::TestFileFunctions::test_load_types_from_file",
+  "tests/test_achievements.py::TestGUI::test_app_initialization",
+  "tests/test_achievements.py::TestGUI::test_refresh_list_with_data",
+  "tests/test_achievements.py::TestIntegration::test_full_flow",
+  "tests/test_achievements.py::TestModels::test_achievement_display_string_long",
+  "tests/test_achievements.py::TestModels::test_achievement_display_string_short",
+  "tests/test_achievements.py::TestModels::test_achievement_from_db_row"
+]
