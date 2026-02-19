@@ -1,11 +1,12 @@
 {
-  "tests/test_research.py::TestDatabaseManager::test_database_manager_init_success": true,
-  "tests/test_research.py::TestDatabaseManager::test_database_manager_init_failure": true,
   "tests/test_research.py::TestDatabaseManager::test_get_all_projects": true,
-  "tests/test_research.py::TestFileManager::test_file_manager_init": true,
   "tests/test_research.py::TestFileManager::test_save_markdown": true,
   "tests/test_research.py::TestFileManager::test_read_markdown": true,
   "tests/test_research.py::TestFileManager::test_list_markdown_files": true,
   "tests/test_research.py::TestExportTools::test_export_to_excel": true,
-  "tests/test_research.py::TestExportTools::test_export_to_pdf": true
+  "tests/test_research.py::TestExportTools::test_export_to_pdf": true,
+  "tests/test_research.py::TestDatabaseManager::test_create_entry": true,
+  "tests/test_research.py::TestDatabaseManager::test_get_all_entries": true,
+  "tests/test_research.py::TestExportTools::test_generate_pdf_report": true,
+  "tests/test_research.py::TestFileManager::test_write_md_file": true
 }

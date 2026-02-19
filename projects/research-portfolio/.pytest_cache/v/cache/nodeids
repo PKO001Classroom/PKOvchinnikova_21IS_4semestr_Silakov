@@ -13,6 +13,7 @@
   "tests/test_research.py::TestExportTools::test_export_to_pdf",
   "tests/test_research.py::TestExportTools::test_export_tools_init",
   "tests/test_research.py::TestExportTools::test_generate_excel_report",
+  "tests/test_research.py::TestExportTools::test_generate_pdf_report",
   "tests/test_research.py::TestExportTools::test_generate_word_report",
   "tests/test_research.py::TestExportTools::test_init",
   "tests/test_research.py::TestFileManager::test_create_md_file",
@@ -20,9 +21,11 @@
   "tests/test_research.py::TestFileManager::test_file_manager_init",
   "tests/test_research.py::TestFileManager::test_init",
   "tests/test_research.py::TestFileManager::test_list_markdown_files",
+  "tests/test_research.py::TestFileManager::test_open_md_file_external",
   "tests/test_research.py::TestFileManager::test_read_markdown",
   "tests/test_research.py::TestFileManager::test_read_md_file",
   "tests/test_research.py::TestFileManager::test_save_markdown",
   "tests/test_research.py::TestFileManager::test_update_md_file",
+  "tests/test_research.py::TestFileManager::test_write_md_file",
   "tests/test_research.py::TestGUI::test_gui_initialization"
 ]
