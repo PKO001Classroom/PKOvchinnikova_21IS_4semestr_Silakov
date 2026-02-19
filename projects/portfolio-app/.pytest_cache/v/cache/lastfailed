@@ -1,6 +1,5 @@
 {
-  "tests/test_portfolio.py::TestExporter::test_exporter_init": true,
-  "tests/test_portfolio.py::TestExporter::test_generate_excel_report": true,
-  "tests/test_portfolio.py::TestExporter::test_generate_word_report": true,
-  "tests/test_portfolio.py::TestPortfolioApp::test_ensure_folders": true
+  "tests/test_portfolio.py::TestPortfolioApp::test_ensure_folders": true,
+  "tests/test_portfolio.py::TestFileHandler::test_save_markdown": true,
+  "tests/test_portfolio.py::TestFileHandler::test_read_markdown": true
 }
