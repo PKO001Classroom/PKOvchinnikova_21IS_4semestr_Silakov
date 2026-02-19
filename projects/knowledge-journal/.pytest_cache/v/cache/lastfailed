@@ -10,7 +10,6 @@
   "tests/test_database.py::TestDatabaseManager::test_get_notes_by_category": true,
   "tests/test_knowledge.py::TestDatabase::test_database_manager_init": true,
   "tests/test_knowledge.py::TestDatabase::test_init_db_creates_tables": true,
-  "tests/test_knowledge.py::TestDatabase::test_add_note": true,
   "tests/test_knowledge.py::TestDatabase::test_get_all_notes": true,
   "tests/test_knowledge.py::TestDatabase::test_search_notes": true,
   "tests/test_knowledge.py::TestFileManager::test_save_note_to_file": true,
@@ -18,5 +17,8 @@
   "tests/test_knowledge.py::TestFileManager::test_list_notes": true,
   "tests/test_knowledge.py::TestReporting::test_export_to_pdf": true,
   "tests/test_knowledge.py::TestReporting::test_export_to_excel": true,
-  "tests/test_knowledge.py::TestGUI::test_app_initialization": true
+  "tests/test_knowledge.py::TestGUI::test_app_initialization": true,
+  "tests/test_knowledge.py::TestFileManager::test_save_to_file": true,
+  "tests/test_knowledge.py::TestFileManager::test_read_from_file": true,
+  "tests/test_knowledge.py::TestFileManager::test_list_files": true
 }
