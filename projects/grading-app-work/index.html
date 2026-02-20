@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Система оценивания студентов</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .nav {
+            background: #f8f9fa;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .nav button {
+            color: #495057;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-weight: 500;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .nav button:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        h2 {
+            color: #495057;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 2px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #f56565 0%, #c53030 100%);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #495057;
+            font-weight: 500;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .tab {
+            display: none;
+        }
+        
+        .tab.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Система оценивания студентов</h1>
+            <p>Локальная версия (данные сохраняются в браузере)</p>
+        </div>
+        
+        <div class="nav">
+            <button onclick="showTab('students')">👥 Студенты</button>
+            <button onclick="showTab('subjects')">📚 Предметы</button>
+            <button onclick="showTab('grades')">📊 Оценки</button>
+            <button onclick="showTab('stats')">📈 Статистика</button>
+        </div>
+        
+        <div class="content">
+            <!-- Вкладка Студенты -->
+            <div id="tab-students" class="tab active">
+                <h2>👥 Управление студентами</h2>
+                
+                <div class="card">
+                    <h3>➕ Добавить студента</h3>
+                    <div class="form-group">
+                        <label>ФИО студента:</label>
+                        <input type="text" id="student-name" placeholder="Введите ФИО">
+                    </div>
+                    <div class="form-group">
+                        <label>Номер зачётки:</label>
+                        <input type="text" id="student-id" placeholder="Например: 12345">
+                    </div>
+                    <button class="btn" onclick="addStudent()">➕ Добавить</button>
+                </div>
+                
+                <div class="card">
+                    <h3>📋 Список студентов</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>ФИО</th>
+                                <th>Номер зачётки</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="students-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Вкладка Предметы -->
+            <div id="tab-subjects" class="tab">
+                <h2>📚 Управление предметами</h2>
+                
+                <div class="card">
+                    <h3>➕ Добавить предмет</h3>
+                    <div class="form-group">
+                        <label>Название предмета:</label>
+                        <input type="text" id="subject-name" placeholder="Например: Математика">
+                    </div>
+                    <button class="btn" onclick="addSubject()">➕ Добавить</button>
+                </div>
+                
+                <div class="card">
+                    <h3>📋 Список предметов</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Название</th>
+                            </tr>
+                        </thead>
+                        <tbody id="subjects-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Вкладка Оценки -->
+            <div id="tab-grades" class="tab">
+                <h2>📊 Выставление оценок</h2>
+                
+                <div class="card">
+                    <h3>➕ Добавить оценку</h3>
+                    <div class="form-group">
+                        <label>Студент:</label>
+                        <select id="grade-student"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Предмет:</label>
+                        <select id="grade-subject"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Оценка (2-5):</label>
+                        <input type="number" id="grade-value" min="2" max="5" value="5">
+                    </div>
+                    <div class="form-group">
+                        <label>Дата:</label>
+                        <input type="date" id="grade-date">
+                    </div>
+                    <button class="btn" onclick="addGrade()">➕ Добавить</button>
+                </div>
+                
+                <div class="card">
+                    <h3>📋 Последние оценки</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Студент</th>
+                                <th>Предмет</th>
+                                <th>Оценка</th>
+                                <th>Дата</th>
+                            </tr>
+                        </thead>
+                        <tbody id="grades-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Вкладка Статистика -->
+            <div id="tab-stats" class="tab">
+                <h2>📈 Статистика</h2>
+                
+                <div class="card">
+                    <h3>Выберите студента:</h3>
+                    <select id="stats-student" onchange="showStats()"></select>
+                    
+                    <div id="stats-display" style="margin-top: 20px;">
+                        <p>Выберите студента для просмотра статистики</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация данных из localStorage
+        let students = JSON.parse(localStorage.getItem('students')) || [];
+        let subjects = JSON.parse(localStorage.getItem('subjects')) || [];
+        let grades = JSON.parse(localStorage.getItem('grades')) || [];
+        
+        // Сохранение данных в localStorage
+        function saveData() {
+            localStorage.setItem('students', JSON.stringify(students));
+            localStorage.setItem('subjects', JSON.stringify(subjects));
+            localStorage.setItem('grades', JSON.stringify(grades));
+        }
+        
+        // Переключение вкладок
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+            updateAllTables();
+        }
+        
+        // Обновление всех таблиц
+        function updateAllTables() {
+            updateStudentsTable();
+            updateSubjectsTable();
+            updateGradesTable();
+            updateSelects();
+        }
+        
+        // Обновление выпадающих списков
+        function updateSelects() {
+            const gradeStudent = document.getElementById('grade-student');
+            const gradeSubject = document.getElementById('grade-subject');
+            const statsStudent = document.getElementById('stats-student');
+            
+            gradeStudent.innerHTML = '<option value="">Выберите студента</option>';
+            gradeSubject.innerHTML = '<option value="">Выберите предмет</option>';
+            statsStudent.innerHTML = '<option value="">Выберите студента</option>';
+            
+            students.forEach(student => {
+                gradeStudent.innerHTML += `<option value="${student.id}">${student.name}</option>`;
+                statsStudent.innerHTML += `<option value="${student.id}">${student.name}</option>`;
+            });
+            
+            subjects.forEach(subject => {
+                gradeSubject.innerHTML += `<option value="${subject.id}">${subject.name}</option>`;
+            });
+            
+            // Установка текущей даты
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('grade-date').value = today;
+        }
+        
+        // Обновление таблицы студентов
+        function updateStudentsTable() {
+            const tbody = document.getElementById('students-body');
+            tbody.innerHTML = '';
+            
+            students.forEach(student => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${student.studentId}</td>
+                        <td>
+                            <button class="btn btn-danger" onclick="deleteStudent(${student.id})">🗑️ Удалить</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+        
+        // Обновление таблицы предметов
+        function updateSubjectsTable() {
+            const tbody = document.getElementById('subjects-body');
+            tbody.innerHTML = '';
+            
+            subjects.forEach(subject => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${subject.id}</td>
+                        <td>${subject.name}</td>
+                    </tr>
+                `;
+            });
+        }
+        
+        // Обновление таблицы оценок
+        function updateGradesTable() {
+            const tbody = document.getElementById('grades-body');
+            tbody.innerHTML = '';
+            
+            grades.forEach(grade => {
+                const student = students.find(s => s.id === grade.studentId);
+                const subject = subjects.find(s => s.id === grade.subjectId);
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${student ? student.name : 'Неизвестно'}</td>
+                        <td>${subject ? subject.name : 'Неизвестно'}</td>
+                        <td><strong>${grade.value}</strong></td>
+                        <td>${grade.date}</td>
+                    </tr>
+                `;
+            });
+        }
+        
+        // Добавление студента
+        function addStudent() {
+            const name = document.getElementById('student-name').value;
+            const studentId = document.getElementById('student-id').value;
+            
+            if (!name || !studentId) {
+                alert('Заполните все поля');
+                return;
+            }
+            
+            const newStudent = {
+                id: Date.now(),
+                name: name,
+                studentId: studentId
+            };
+            
+            students.push(newStudent);
+            saveData();
+            updateAllTables();
+            
+            document.getElementById('student-name').value = '';
+            document.getElementById('student-id').value = '';
+        }
+        
+        // Удаление студента
+        function deleteStudent(id) {
+            if (confirm('Удалить студента?')) {
+                students = students.filter(s => s.id !== id);
+                grades = grades.filter(g => g.studentId !== id);
+                saveData();
+                updateAllTables();
+            }
+        }
+        
+        // Добавление предмета
+        function addSubject() {
+            const name = document.getElementById('subject-name').value;
+            
+            if (!name) {
+                alert('Введите название предмета');
+                return;
+            }
+            
+            const newSubject = {
+                id: Date.now(),
+                name: name
+            };
+            
+            subjects.push(newSubject);
+            saveData();
+            updateAllTables();
+            
+            document.getElementById('subject-name').value = '';
+        }
+        
+        // Добавление оценки
+        function addGrade() {
+            const studentId = parseInt(document.getElementById('grade-student').value);
+            const subjectId = parseInt(document.getElementById('grade-subject').value);
+            const value = parseInt(document.getElementById('grade-value').value);
+            const date = document.getElementById('grade-date').value;
+            
+            if (!studentId || !subjectId || !value || !date) {
+                alert('Заполните все поля');
+                return;
+            }
+            
+            const newGrade = {
+                id: Date.now(),
+                studentId: studentId,
+                subjectId: subjectId,
+                value: value,
+                date: date
+            };
+            
+            grades.push(newGrade);
+            saveData();
+            updateAllTables();
+        }
+        
+        // Показ статистики
+        function showStats() {
+            const studentId = parseInt(document.getElementById('stats-student').value);
+            const display = document.getElementById('stats-display');
+            
+            if (!studentId) {
+                display.innerHTML = '<p>Выберите студента</p>';
+                return;
+            }
+            
+            const studentGrades = grades.filter(g => g.studentId === studentId);
+            const student = students.find(s => s.id === studentId);
+            
+            if (studentGrades.length === 0) {
+                display.innerHTML = `<p>У студента ${student.name} пока нет оценок</p>`;
+                return;
+            }
+            
+            // Группировка по предметам
+            const subjectsMap = {};
+            studentGrades.forEach(grade => {
+                const subject = subjects.find(s => s.id === grade.subjectId);
+                if (subject) {
+                    if (!subjectsMap[subject.name]) {
+                        subjectsMap[subject.name] = [];
+                    }
+                    subjectsMap[subject.name].push(grade.value);
+                }
+            });
+            
+            let html = `<h3>Статистика для студента: ${student.name}</h3>`;
+            html += '<table><tr><th>Предмет</th><th>Оценки</th><th>Средний балл</th></tr>';
+            
+            let allGrades = [];
+            for (let [subjectName, subjectGrades] of Object.entries(subjectsMap)) {
+                const avg = (subjectGrades.reduce((a, b) => a + b, 0) / subjectGrades.length).toFixed(2);
+                html += `<tr><td>${subjectName}</td><td>${subjectGrades.join(', ')}</td><td>${avg}</td></tr>`;
+                allGrades = allGrades.concat(subjectGrades);
+            }
+            
+            const totalAvg = (allGrades.reduce((a, b) => a + b, 0) / allGrades.length).toFixed(2);
+            html += `<tr style="background: #e3f2fd;"><td colspan="2"><strong>Общий средний балл</strong></td><td><strong>${totalAvg}</strong></td></tr>`;
+            html += '</table>';
+            
+            display.innerHTML = html;
+        }
+        
+        // Загрузка при старте
+        updateAllTables();
+    </script>
+</body>
+</html>
