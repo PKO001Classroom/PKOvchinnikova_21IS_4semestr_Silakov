@@ -35,7 +35,7 @@
 *   **Проектирование (UML):** [Диаграммы](docs/Chart.ini), [Описание](docs/Designing.md)
 *   **Тест-план:** [The test plan.md](docs/The%20test%20plan.md)
 *   **Приемка:** [Acceptance.md](docs/Acceptance.md)
-* **Эксплуатация:** [Exploitation.md](docs/Practice/Exploitation.md)
+* **Эксплуатация:** [Exploitation.md](docs/Exploitation.md)
 
 ## ⚙️ Быстрый старт
 
